@@ -1,7 +1,6 @@
 package br.com.nass.mvc.mudi.dto;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotBlank;
 
 import br.com.nass.mvc.mudi.model.Pedido;
 import br.com.nass.mvc.mudi.model.StatusPedido;

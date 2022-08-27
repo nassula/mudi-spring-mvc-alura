@@ -7,8 +7,5 @@ import br.com.nass.mvc.mudi.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String>{
-
     User findByUsername(String username);
-
-
 }

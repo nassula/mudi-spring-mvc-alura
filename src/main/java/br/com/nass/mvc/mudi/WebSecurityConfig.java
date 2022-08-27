@@ -26,14 +26,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().authenticated()
+                .antMatchers("/home/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/home", true)
+                        .defaultSuccessUrl("/usuario/pedido", true)
                         .permitAll()
                 )
-                .logout(logout -> logout.logoutUrl("/logout"));
+                .logout(logout -> {
+                    logout.logoutUrl("/logout")
+                            .logoutSuccessUrl("/home");
+                }).csrf().disable();
     }
 
     @Override
@@ -44,12 +50,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(encoder);
 
+//Código para criar usuários no BD
 //		UserDetails user =
 //				 User.builder()
-//					.username("maria")
-//					.password(encoder.encode("maria"))
+//					.username("diego")
+//					.password(encoder.encode("diego"))
 //					.roles("ADM")
 //					.build();
+//
+//		auth.jdbcAuthentication().dataSource(dataSource)
+//                .passwordEncoder(encoder)
+//                .withUser(user);
 //		System.out.println("User maria senha: "+ encoder.encode("diego"));
     }
 
